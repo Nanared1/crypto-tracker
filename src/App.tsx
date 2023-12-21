@@ -26,7 +26,7 @@ const SearchInput = (props: TextInputProps) => {
     <TextInput
       radius="xl"
       size="md"
-      placeholder="Search questions"
+      placeholder="Search Crypto"
       rightSectionWidth={42}
       leftSection={<IconSearch style={{ width: rem(18), height: rem(18) }} stroke={1.5} />}
       rightSection={
@@ -39,10 +39,10 @@ const SearchInput = (props: TextInputProps) => {
   );
 }
 
-const Chart = () => {
+const CryptoTable = () => {
   return (
     <div>
-      <h1>Chart</h1>
+      <h1>CryptoTable</h1>
     </div>
   )
 }
@@ -53,7 +53,7 @@ const App = () => {
       <MantineProvider theme={theme}>
       <S.Container>
         <SearchInput />
-        <Chart />
+        <CryptoTable />
       </S.Container>
       </MantineProvider>
     </QueryClientProvider>
