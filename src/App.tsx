@@ -38,7 +38,7 @@ const S = {
 
 const CryptoTable = () => {
   const {data, error, isFetching } = useQuery({
-    queryKey: ["gainers-losers"],
+    queryKey: ["listings-latest"],
     queryFn: async () => {
       const res = await axios.get(
         "http://localhost:3001/cryptocurrency/listings/latest",
@@ -46,7 +46,6 @@ const CryptoTable = () => {
           params: { limit: 10 },
         },
       )
-      console.log(res.data)
       return res.data.data
     },
     refetchInterval: 60000, // Refetch the data every minute
@@ -59,10 +58,10 @@ const CryptoTable = () => {
   const rows = data.map((row: CoinData) => (
     <Table.Tr key={row.id}>
       <Table.Td>{row.name}</Table.Td>
-      <Table.Td>{row.quote.USD.price}</Table.Td>
-      <Table.Td>{row.quote.USD.market_cap}</Table.Td>
-      <Table.Td>{row.circulating_supply}</Table.Td>
-      <Table.Td>{row.quote.USD.volume_change_24h}</Table.Td>
+      <Table.Td>${row.quote.USD.price.toFixed(4)}</Table.Td>
+      <Table.Td>${row.quote.USD.market_cap.toFixed(2)}</Table.Td>
+      <Table.Td>{row.circulating_supply.toFixed(0)}</Table.Td>
+      <Table.Td>{row.quote.USD.volume_change_24h.toFixed(2)}%</Table.Td>
     </Table.Tr>
   ))
 
@@ -71,8 +70,8 @@ const CryptoTable = () => {
       <Table.Tbody>
         <Table.Tr>
           <Table.Th>Name</Table.Th>
-          <Table.Th>Price</Table.Th>
-          <Table.Th>Market Cap</Table.Th>
+          <Table.Th>Price(USD)</Table.Th>
+          <Table.Th>Market Cap(USD)</Table.Th>
           <Table.Th>Circulating Supply</Table.Th>
           <Table.Th>Change %</Table.Th>
         </Table.Tr>

@@ -6,21 +6,21 @@ export interface CoinData {
     num_market_pairs: number;
     date_added: string;
     tags: string[];
-    max_supply: number | null;
+    max_supply?: number;
     circulating_supply: number;
     total_supply: number;
     infinite_supply: boolean;
-    platform: {
-        id: number | null;
-        name: string | null;
-        symbol: string | null;
-        slug: string | null;
-        token_address: string | null;
-    } | null;
+    platform?: {
+        id?: number;
+        name?: string;
+        symbol?: string;
+        slug?: string;
+        token_address?: string;
+    };
     cmc_rank: number;
-    self_reported_circulating_supply: number | null;
-    self_reported_market_cap: number | null;
-    tvl_ratio: number | null;
+    self_reported_circulating_supply?: number;
+    self_reported_market_cap?: number;
+    tvl_ratio?: number;
     last_updated: string;
     quote: {
         USD: {
@@ -36,7 +36,7 @@ export interface CoinData {
             market_cap: number;
             market_cap_dominance: number;
             fully_diluted_market_cap: number;
-            tvl: number | null;
+            tvl?: number;
             last_updated: string;
         };
     };
