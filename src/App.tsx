@@ -1,7 +1,7 @@
 import React from "react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import styled from "styled-components"
-import { MantineProvider, ScrollArea, createTheme } from "@mantine/core"
+import { MantineProvider, createTheme } from "@mantine/core"
 import "@mantine/core/styles.css"
 import { CryptoTable } from "./components/CryptoTable/CyptoTable"
 
@@ -32,9 +32,7 @@ const App = () => {
       <MantineProvider theme={theme}>
         <S.Container>
           <S.CrytoTableContainer>
-            <ScrollArea>
-              <CryptoTable />
-            </ScrollArea>
+            <CryptoTable />
           </S.CrytoTableContainer>
         </S.Container>
       </MantineProvider>
