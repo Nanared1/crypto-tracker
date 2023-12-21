@@ -8,7 +8,7 @@ const cors = require('cors')
 const port = 3001
 
 app.use(cors({
-	origin: 'http://localhost:3000/'
+	origin: '*'
 }))
 
 app.get("/cryptocurrency/listings/latest", async (req, res) => {
