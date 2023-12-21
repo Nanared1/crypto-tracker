@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import styled from "styled-components"
 import { MantineProvider, createTheme } from "@mantine/core"
 import "@mantine/core/styles.css"
-import { CryptoTable } from "./components/CryptoTable/CyptoTable"
+import { CryptoTable } from "./components/CryptoTable/CryptoTable"
 
 const queryClient = new QueryClient()
 
