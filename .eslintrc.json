@@ -19,6 +19,9 @@
     "import/no-extraneous-dependencies": "off",
     "import/no-relative-packages": "off",
     "import/no-unresolved": "off",
-    "object-pattern-newline/enforce": "off"
+    "object-pattern-newline/enforce": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars-experimental": "off",
+    "no-unused-vars": "warn"
   }
 }
