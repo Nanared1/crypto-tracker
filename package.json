@@ -31,7 +31,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node server/app.js"
+    "server": "node server/app.js",
+    "env": "cp .env.example .env"
   },
   "eslintConfig": {
     "extends": [
