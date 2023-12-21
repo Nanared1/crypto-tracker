@@ -5,7 +5,16 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient()
 
-function App() {
+
+const Chart = () => {
+  return (
+    <div>
+      <h1>Chart</h1>
+    </div>
+  )
+}
+
+const  App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
@@ -20,7 +29,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            <Chart />
           </a>
         </header>
       </div>
