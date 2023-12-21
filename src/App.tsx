@@ -9,14 +9,11 @@ import {
   MantineProvider,
   ScrollArea,
   Table,
-  TextInput,
-  TextInputProps,
   createTheme,
-  rem,
 } from "@mantine/core"
-import { IconSearch } from "@tabler/icons-react"
 import axios from "axios"
 import "@mantine/core/styles.css"
+import { CoinData } from "./types"
 
 const queryClient = new QueryClient()
 
@@ -39,37 +36,35 @@ const S = {
   `,
 }
 
-const SearchInput = (props: TextInputProps) => {
-  return (
-    <TextInput
-      placeholder="Search by any field"
-      mb="md"
-      leftSection={
-        <IconSearch style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-      }
-      {...props}
-    />
-  )
-}
-
 const CryptoTable = () => {
-  const { status, data, error, isFetching } = useQuery({
+  const {data, error, isFetching } = useQuery({
     queryKey: ["gainers-losers"],
     queryFn: async () => {
       const res = await axios.get(
         "http://localhost:3001/cryptocurrency/listings/latest",
         {
-          params: { limit: 10},
+          params: { limit: 10 },
         },
       )
-      return res.data
+      console.log(res.data)
+      return res.data.data
     },
-    // Refetch the data every minute
-    refetchInterval: 60000,
+    refetchInterval: 60000, // Refetch the data every minute
+    refetchOnWindowFocus: false,
   })
 
   if (error) return <div>error</div>
-  if (isFetching) return <div>loading</div>
+  if (isFetching && !data) return <div>loading...</div>
+
+  const rows = data.map((row: CoinData) => (
+    <Table.Tr key={row.id}>
+      <Table.Td>{row.name}</Table.Td>
+      <Table.Td>{row.quote.USD.price}</Table.Td>
+      <Table.Td>{row.quote.USD.market_cap}</Table.Td>
+      <Table.Td>{row.circulating_supply}</Table.Td>
+      <Table.Td>{row.quote.USD.volume_change_24h}</Table.Td>
+    </Table.Tr>
+  ))
 
   return (
     <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
@@ -82,6 +77,9 @@ const CryptoTable = () => {
           <Table.Th>Change %</Table.Th>
         </Table.Tr>
       </Table.Tbody>
+      <Table.Tbody>
+        {rows}
+      </Table.Tbody>
     </Table>
   )
 }
@@ -93,7 +91,6 @@ const App = () => {
         <S.Container>
           <S.CrytoTableContainer>
             <ScrollArea>
-              <SearchInput />
               <CryptoTable />
             </ScrollArea>
           </S.CrytoTableContainer>
