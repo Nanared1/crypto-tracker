@@ -1,5 +1,9 @@
 import React from "react"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query"
 import styled from "styled-components"
 import {
   MantineProvider,
@@ -10,7 +14,8 @@ import {
   createTheme,
   rem,
 } from "@mantine/core"
-import { IconSearch, IconSelector, IconChevronDown, IconChevronUp, } from "@tabler/icons-react"
+import { IconSearch } from "@tabler/icons-react"
+import axios from "axios"
 import "@mantine/core/styles.css"
 
 const queryClient = new QueryClient()
@@ -48,28 +53,36 @@ const SearchInput = (props: TextInputProps) => {
 }
 
 const CryptoTable = () => {
+  const { status, data, error, isFetching } = useQuery({
+    queryKey: ["gainers-losers"],
+    queryFn: async () => {
+      const res = await axios.get(
+        "http://localhost:3001/cryptocurrency/listings/latest",
+        {
+          params: { limit: 10},
+        },
+      )
+      return res.data
+    },
+    // Refetch the data every minute
+    refetchInterval: 60000,
+  })
+
+  if (error) return <div>error</div>
+  if (isFetching) return <div>loading</div>
+
   return (
     <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
-        <Table.Tbody>
-          <Table.Tr>
-            <Table.Th>
-              Name
-            </Table.Th>
-            <Table.Th>
-              Price
-            </Table.Th>
-            <Table.Th>
-              Market Cap
-            </Table.Th>
-            <Table.Th>
-              Circulating Supply
-            </Table.Th>
-            <Table.Th>
-              Change %
-            </Table.Th>
-          </Table.Tr>
-        </Table.Tbody>
-      </Table>
+      <Table.Tbody>
+        <Table.Tr>
+          <Table.Th>Name</Table.Th>
+          <Table.Th>Price</Table.Th>
+          <Table.Th>Market Cap</Table.Th>
+          <Table.Th>Circulating Supply</Table.Th>
+          <Table.Th>Change %</Table.Th>
+        </Table.Tr>
+      </Table.Tbody>
+    </Table>
   )
 }
 
