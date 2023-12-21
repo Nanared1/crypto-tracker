@@ -30,7 +30,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "node 'node_modules/.bin/jest'",
     "eject": "react-scripts eject",
     "server": "node server/app.js",
     "env": "cp .env.example .env"
