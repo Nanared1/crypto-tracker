@@ -24,3 +24,5 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 
+If all goes well, this is what the application looks like:
+<img width="2997" alt="Screenshot 2023-12-21 at 6 50 23 PM" src="https://github.com/Nanared1/crypto-tracker/assets/23175994/f9c625a7-584a-4f0b-a40f-ef0447ef8bc4">
